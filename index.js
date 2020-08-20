@@ -9,7 +9,7 @@ const welcomeChannelName = "환영합니다";
 const byeChannelName = "안녕히가세요";
 const welcomeChannelComment = "잘왔노새12끼야^^";
 const byeChannelComment = "잘꺼지셈^^ㅂㅂ";
-const adminUserId = 250693463065100298;
+const adminUserId = 685016222957699093;
 
 client.on('ready', () => {
   console.log('켰다.');
