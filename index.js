@@ -65,6 +65,8 @@ client.on('message', (message) => {
       {name: '!청소', desc: '텍스트 지움'},
       {name: '!초대코드', desc: '해당 채널의 초대 코드 표기'},
       {name: '!초대코드2', desc: '봇이 들어가있는 모든 채널의 초대 코드 표기'},
+      {name: '!강퇴', desc: '디스코드방에 있는 유저를 강퇴시킴'},
+      {name: '!밴', desc: '디스코드방에 있는 유저를 밴시킴'},
     ];
     let commandStr = '';
     let embed = new Discord.RichEmbed()
