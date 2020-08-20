@@ -1,39 +1,16 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const token = process.env.token;
+const token = process.argv.length == 2 ? process.env.token : "";
 const moment = require("moment");
 require("moment-duration-format");
 const welcomeChannelName = "환영합니다";
 const byeChannelName = "안녕히가세요";
 const welcomeChannelComment = "잘왔노새12끼야^^";
 const byeChannelComment = "잘꺼지셈^^ㅂㅂ";
-const adminUserId = 685016222957699093;
 
 client.on('ready', () => {
   console.log('켰다.');
   client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
-
-  let state_list = [
-    '!help를 쳐보세요.',
-    '메렁메렁',
-    '에베베베베',
-  ]
-  let state_list_index = 1;
-  let change_delay = 3000; // 이건 초입니당. 1000이 1초입니당.
-
-  function changeState() {
-    setTimeout(() => {
-      // console.log( '상태 변경 -> ', state_list[state_list_index] );
-      client.user.setPresence({ game: { name: state_list[state_list_index] }, status: 'online' })
-      state_list_index += 1;
-      if(state_list_index >= state_list.length) {
-        state_list_index = 0;
-      }
-      changeState()
-    }, change_delay);
-  }
-
-  // changeState();
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -55,44 +32,7 @@ client.on("guildMemberRemove", (member) => {
 });
 
 client.on('message', (message) => {
-  MessageSave(message)
   if(message.author.bot) return;
-
-  if(message.channel.type == 'dm') {
-    if(message.author.id == adminUserId) return;
-
-    /* not use embed */
-    let msg = message.author+'이(가) 메세지를 보냈습니다.\n'+message.content;
-    client.users.find(x => x.id == adminUserId).send(msg)
-
-    // /* use embed */
-    // let embed = new Discord.RichEmbed()
-    // let img = message.author.avatar ? `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.webp?size=256` : undefined;
-    // let user = message.author.username+'#'+message.author.discriminator
-    // let msg = message.content;
-    // embed.setColor('#186de6')
-    // embed.setAuthor(user+'이(가) 메세지를 보냈습니다.', img)
-    // embed.setFooter(`JAMMIN DM BOT ❤️`)
-    // embed.addField('메세지 내용', msg, true);
-    // embed.setTimestamp()
-    // client.users.find(x => x.id == adminUserId).send(embed);
-  }
-
-  if(message.content.startsWith('!역할추가')) {
-    if(message.channel.type == 'dm') {
-      return message.reply('dm에서 사용할 수 없는 명령어 입니다.');
-    }
-    if(message.channel.type != 'dm' && checkPermission(message)) return
-
-    if(message.content.split('<@').length == 3) {
-      if(message.content.split(' ').length != 3) return;
-
-      var userId = message.content.split(' ')[1].match(/[\u3131-\uD79D^a-zA-Z^0-9]/ugi).join('')
-      var role = message.content.split(' ')[2].match(/[\u3131-\uD79D^a-zA-Z^0-9]/ugi).join('')
-
-      message.member.guild.members.find(x => x.id == userId).addRole(role);
-    }
-  }
 
   if(message.content == 'ping') {
     return message.reply('pong');
@@ -104,7 +44,7 @@ client.on('message', (message) => {
     var duration = moment.duration(client.uptime).format(" D [일], H [시간], m [분], s [초]");
     embed.setColor('#186de6')
     embed.setAuthor('server info of JAMMIN DM BOT', img)
-    embed.setFooter(`JAMMIN DM BOT ❤️`)
+    embed.setFooter(`JAMMIN DM BOT❤️`)
     embed.addBlankField()
     embed.addField('RAM usage',    `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`, true);
     embed.addField('running time', `${duration}`, true);
@@ -163,7 +103,7 @@ client.on('message', (message) => {
     let embed = new Discord.RichEmbed()
       .setAuthor('Help of JAMMIN DM BOT', helpImg)
       .setColor('#186de6')
-      .setFooter(`JAMMIN DM BOT❤️`)
+      .setFooter(`JAMMIN DM BOT ❤️`)
       .setTimestamp()
     
     commandList.forEach(x => {
@@ -205,7 +145,7 @@ client.on('message', (message) => {
       let embed = new Discord.RichEmbed()
         .setAuthor('공지 of JAMMIN DM BOT')
         .setColor('#186de6')
-        .setFooter(`JAMMIN DM BOT❤️`)
+        .setFooter(`JAMMIN DM BOT ❤️`)
         .setTimestamp()
   
       embed.addField('공지: ', contents);
@@ -296,21 +236,6 @@ client.on('message', (message) => {
     let kick_msg = message.author.username+'#'+message.author.discriminator+'이(가) 강퇴시켰습니다.';
 
     message.member.guild.members.find(x => x.id == userId).ban(kick_msg)
-  } else if(message.content.startsWith('!주사위')) {
-    let min = 1;
-    let max = 6;
-    let dice_num = parseInt(Math.random() * (max - min) + min);
-    return message.reply(`${dice_num}가 나왔습니다.`);
-  } else if(message.content.startsWith('!야')) {
-    let arr = [
-      '왜',
-      '뭐',
-      '뭠마',
-    ]
-    let min = 0;
-    let max = arr.length;
-    let index = parseInt(Math.random() * (max - min) + min);
-    return message.reply(`${arr[index]}가 나왔습니다.`);
   }
 });
 
