@@ -3,8 +3,6 @@ const client = new Discord.Client();
 const token = process.env.token;
 const moment = require("moment");
 require("moment-duration-format");
-const momenttz = require('moment-timezone');
-const MessageAdd = require('./db/message_add.js')
 const welcomeChannelName = "환영합니다";
 const byeChannelName = "안녕히가세요";
 const welcomeChannelComment = "잘왔노새12끼야^^";
