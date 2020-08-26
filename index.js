@@ -220,7 +220,7 @@ function checkPermission(message) {
 if(message.content.startsWith("!뮤트")) {
   if(message.member.hasPermission("MANAGE_MESSAGE")) { // 메세지 관리 권한
     let user = message.mentions.members.first()
-    let mute = message.guild.roles.find(r => r.id === '748150023757234177')
+    let mute = message.guild.roles.cache.find(r => r.id === '748150023757234177').id
     if(!user) return message.reply("!뮤트 @멘션")
     user.addRole(mute).then(member => {
       message.channel.send(`${member.displayName} 에게 뮤트를 먹였습니다.`)
