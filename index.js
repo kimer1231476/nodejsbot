@@ -8,7 +8,7 @@ const byeChannelComment = "잘꺼지셈^^ㅂㅂ";
 
 client.on('ready', () => {
   console.log('켰다.');
-  client.user.setPresence({ game: { name: '!help를 쳐보세요.' }, status: 'online' })
+  client.user.setPresence({ game: { name: '소스를 찬양' }, status: 'online' })
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -18,7 +18,7 @@ client.on("guildMemberAdd", (member) => {
 
   welcomeChannel.send(`<@${newUser.id}> ${welcomeChannelComment}\n`);
 
-  member.addRole(guild.roles.find(role => role.name == "user"));
+  member.addRole(guild.roles.find(role => role.name == "[ USER ]"));
 });
 
 client.on("guildMemberRemove", (member) => {
