@@ -217,6 +217,21 @@ function checkPermission(message) {
   }
 }
 
+if(message.content.startsWith("!뮤트")) {
+  if(message.member.hasPermission("MANAGE_MESSAGE")) { // 메세지 관리 권한
+    let user = message.mentions.members.first()
+    let mute = message.guild.roles.find(r => r.id === '748150023757234177')
+    if(!user) return message.reply("!뮤트 @멘션")
+    user.addRole(mute).then(member => {
+      message.channel.send(`${member.displayName} 에게 뮤트를 먹였습니다.`)
+    }).catch(() => {
+      message.channel.send(`역할을 지급하지 못했습니다.`)
+    })
+  } else { 
+    message.reply("권한이 없습니다.") 
+  } 
+}
+
 function changeCommandStringLength(str, limitLen = 8) {
   let tmp = str;
   limitLen -= tmp.length;
