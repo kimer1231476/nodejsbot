@@ -1,9 +1,9 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = process.argv.length == 2 ? process.env.token : "";
-const welcomeChannelName = "환영합니다";
+const welcomeChannelName = "이리오너라";
 const byeChannelName = "안녕히가세요";
-const welcomeChannelComment = "잘왔노새12끼야^^";
+const welcomeChannelComment = "반가워유";
 const byeChannelComment = "잘꺼지셈^^ㅂㅂ";
 
 client.on('ready', () => {
@@ -55,7 +55,7 @@ client.on('message', (message) => {
 
     message.channel.send(embed)
   } else if(message.content == '!help') {
-    let helpImg = 'https://images-ext-1.discordapp.net/external/RyofVqSAVAi0H9-1yK6M8NGy2grU5TWZkLadG-rwqk0/https/i.imgur.com/EZRAPxR.png';
+    let helpImg = 'https://cdn.discordapp.com/attachments/748506446848720906/753460744489533490/df6f090bf50e2c78.gif';
     let commandList = [
       {name: '!help', desc: 'help'},
       {name: 'ping', desc: '현재 핑 상태'},
@@ -70,9 +70,9 @@ client.on('message', (message) => {
     ];
     let commandStr = '';
     let embed = new Discord.RichEmbed()
-      .setAuthor('Help of JAMMIN DM BOT', helpImg)
+      .setAuthor('Help of 똘똘이 BOT', helpImg)
       .setColor('#186de6')
-      .setFooter(`JAMMIN DM BOT ❤️`)
+      .setFooter(`똘똘이 BOT ❤️`)
       .setTimestamp()
     
     commandList.forEach(x => {
@@ -112,9 +112,9 @@ client.on('message', (message) => {
     if(message.member != null) { // 채널에서 공지 쓸 때
       let contents = message.content.slice('!전체공지2'.length);
       let embed = new Discord.RichEmbed()
-        .setAuthor('공지 of JAMMIN DM BOT')
+        .setAuthor('공지 of 똘똘이 BOT')
         .setColor('#186de6')
-        .setFooter(`JAMMIN DM BOT ❤️`)
+        .setFooter(`똘똘이 BOT ❤️`)
         .setTimestamp()
   
       embed.addField('공지: ', contents);
